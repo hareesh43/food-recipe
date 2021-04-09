@@ -53,4 +53,11 @@ footer {
   padding: 0 20px;
   width: 100%;
   box-sizing: border-box;
-}
+  }
+
+  .actions a {
+    color: #fff;
+    background: #f01b29;
+    padding: 16px 24px;
+    text-decoration: none;
+  }

@@ -17,11 +17,22 @@ export async function getStaticProps() {
 }
 
 export default function Home({ recipies }) {
+  console.log(recipies);
   return (
     <div className="recipe-list">
       {recipies.map((recipe) => (
         <RecipeCard key={recipe.sys.id} recipe={recipe} />
       ))}
+      <style jsx>
+        {`
+        .recipe-list{
+          display:grid;
+          grid-template-columns: 1fr 1fr !important;
+          grid-gap:20px
+        }
+        
+        `}
+      </style>
     </div>
   );
 }
