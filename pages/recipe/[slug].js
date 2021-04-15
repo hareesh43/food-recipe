@@ -1,6 +1,7 @@
 import { createClient } from "contentful";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Skeliton from "../../componets/Skeliton";
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -16,7 +17,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -26,15 +27,26 @@ export async function getStaticProps({ params }) {
     "fields.slug": params.slug,
   });
 
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       recipies: items[0],
-      revalidate:1
+      revalidate: 1,
     },
   };
 }
 
 export default function Details({ recipies }) {
+  if (!recipies) return <Skeliton />;
+
   console.log(recipies);
   const {
     title,
